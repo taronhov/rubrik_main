@@ -29,6 +29,8 @@ def main():
     try:
         r.table("stargazers").insert(r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers')).run(connection)
 
+        r.table("stargazers").insert(r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers', page='link-next', page_limit=10 )).run(connection)
+
         stg_count = r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers').count().run(connection)
 
         name_id = r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers').pluck('login', 'id').order_by('id').run(connection)
@@ -38,9 +40,10 @@ def main():
 
         # r.table("google").insert(r.http('www.google.com')).run(connection)
 
-        # cursor = r.table("stargazers").run(connection)
-        # for document in cursor:
-        #     print(document)
+        cursor = r.table("stargazers").run(connection)
+        for _ in range(10):
+            for document in cursor:
+                print(document)
         
         print (stg_count)
 
