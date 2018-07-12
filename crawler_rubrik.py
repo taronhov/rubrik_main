@@ -27,6 +27,8 @@ def main():
     # Connecting to web-sites to reseive data:
     connection = r.connect( "localhost", 28015)
     try:
+        # Here, for demonstrative purposes, the REST API (v3) of GitHub web-site is used.
+        # Reference: https://developer.github.com/v3/
         r.table("stargazers").insert(r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers')).run(connection)
 
         r.table("stargazers").insert(r.http('https://api.github.com/repos/rethinkdb/rethinkdb/stargazers', page='link-next', page_limit=10 )).run(connection)
