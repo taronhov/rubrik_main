@@ -85,7 +85,12 @@ doc1 = nlp(u'This is a sentence.')
 doc2 = nlp(u'This is another sentence.')
 html = displacy.render([doc1, doc2], style='dep', page=True)
 
+
+
 # Training and updating
+# Training with annotations
+
+# training data
 
 train_data = [
     ("Uber blew through $1 million a week", [(0, 4, 'ORG')]),
@@ -98,9 +103,6 @@ train_data = [
 train_data_2 = [('Who is Chaka Khan?', [(7, 17, 'PERSON')]),
               ('I like London and Berlin.', [(7, 13, 'LOC'), (18, 24, 'LOC')])]
 
-# Training with annotations
-
-# training data
 TRAIN_DATA = [
     ('Who is Shaka Khan?', {
         'entities': [(7, 17, 'PERSON')]
@@ -186,4 +188,3 @@ if __name__ == '__main__':
     # Entities [('London', 'LOC'), ('Berlin', 'LOC')]
     # Tokens [('I', '', 2), ('like', '', 2), ('London', 'LOC', 3),
     # ('and', '', 2), ('Berlin', 'LOC', 3), ('.', '', 2)]
-    
